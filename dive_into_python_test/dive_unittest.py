@@ -24,13 +24,13 @@ class KnownValues(unittest.TestCase):
         (500, 'D'),
         (1000, 'M'),
         (31, 'XXXI'),
-        (148, 'CXLVII I'),
+        (148, 'CXLVIII'),
         (294 , 'CCXCIV'),
         (312, 'CCCXII'),
         (421, 'CDXXI'),
         (528, 'DXXVIII'),
         (621, 'DCXXI'),
-        (782, 'DCCLXXXI I'),
+        (782, 'DCCLXXXII'),
         (870, 'DCCCLXX'),
         (941, 'CMXLI'),
         (1043, 'MXLIII'),
@@ -71,3 +71,97 @@ class KnownValues(unittest.TestCase):
         for integer, numeral in self.knownValues:
             result = roman.toRoman(integer)
             self.assertEqual(numeral, result)
+
+
+# 负面测试类
+
+
+class ToRomanBadInput(unittest.TestCase):
+    '''
+    测试输入数字，转换为罗马字符的负面测试
+    '''
+    def testTooLarge(self):
+        #assertRaises(会引发的错误类型，对应的函数，参数)
+        self.assertRaises(roman.OutOfRangeError, roman.toRoman, 4000)
+
+    def testZero(self):
+        self.assertRaises(roman.OutOfRangeError, roman.toRoman, 0)
+
+    def testNegative(self):
+        self.assertRaises(roman.OutOfRangeError, roman.toRoman, -1)
+
+    def testNonInteger(self):
+        self.assertRaises(roman.NotIntegerError, roman.toRoman, 0.5)
+
+
+class FromRomanBadInput(unittest.TestCase):
+    '''
+    测试输入罗马字符，转换为数字的负面测试
+    '''
+    def testTooManyRepeatedNumerals(self):
+        for s in ('MMMM', 'DD', 'CCCC', 'LL', 'XXXX', 'VV', 'IIII'):
+            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, s)
+
+    def testRepeatedPairs(self):
+        for s in ('CMCM', 'CDCD', 'XCXC', 'XLXL', 'IXIX', 'IVIV'):
+            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, s)
+
+    def testMalfformedAntecedent(self):
+        for s in ('IIMXCC', 'VX', 'DCM', 'CMM', 'IXIV', 'MCMC', 'XCX', 'IVI', 'LM', 'LD', 'LC'):
+            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, s)
+
+
+# 完备性测试
+
+
+class SanityCheck(unittest.TestCase):
+    def testSanity(self):
+        for integer in xrange(1, 4000):
+            numeral = roman.toRoman(integer)
+            result = roman.fromRoman(numeral)
+            self.assertEqual(integer, result)
+
+
+# 大小写测试
+
+
+class CaseCheck(unittest.TestCase):
+    def testToRomanCase(self):
+        for integer in xrange(1, 4000):
+            numeral = roman.toRoman(integer)
+            self.assertEqual(numeral, numeral.upper())
+
+
+    def testFromRomanCase(self):
+        for integer in xrange(1, 4000):
+            numeral = roman.toRoman(integer)
+            roman.fromRoman(numeral.upper())  # 防止toRoman返回小写而导致fromRoman失败
+            self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, numeral.lower())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

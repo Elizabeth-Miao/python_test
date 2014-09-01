@@ -4,3 +4,25 @@
 # @Author  : Nate Archibald (miaolei51886666@126.com)
 
 
+class RomanError(Exception):
+    pass
+
+
+class OutOfRangeError(RomanError):
+    pass
+
+
+class NotIntegerError(RomanError):
+    pass
+
+
+class InvalidRomanNumeralError(RomanError):
+    pass
+
+
+def toRoman(n):
+    pass
+
+
+def fromRoman(s):
+    pass
