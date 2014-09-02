@@ -139,8 +139,12 @@ class CaseCheck(unittest.TestCase):
             self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, numeral.lower())
 
 
+class FromRomanBadInput(unittest.TestCase):
+    def testBlank(self):
+        self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, "")
 
-
+if __name__ == '__main__':
+    unittest.main()
 
 
 
