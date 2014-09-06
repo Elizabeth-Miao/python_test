@@ -35,3 +35,34 @@ print filter(func, li)
 
 li2 = [5, 'a', (2, 'b')]
 print map(map_func, li2)
+
+
+class LazyImport(object):
+    def __init__(self, module_name):
+        self.module_name = module_name
+        self.module = None
+    def __getattr__(self, name):
+        if self.module is None:
+            self.module = __import__(self.module_name)
+            print type(self.module)
+            print name
+        return getattr(self.module, name)
+
+
+string = LazyImport('string')
+
+print string.lowercase
+
+
+
+
+
+
+
+
+
+
+
+
+
+

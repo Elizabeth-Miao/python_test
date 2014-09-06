@@ -17,3 +17,10 @@ test = re.compile(r'.*\.pyc$', re.IGNORECASE)
 files = os.listdir(os.path.abspath(pathname))  # 返回pathname所在目录下的所有文件，返回列表对象
 print type(files)
 print filter(test.search, files)
+
+mylambda = lambda f: os.path.splitext(f)[0]  # splitext()分割文件，文件名&扩展名
+
+modulenames = map(mylambda, files)
+print modulenames
+
+
