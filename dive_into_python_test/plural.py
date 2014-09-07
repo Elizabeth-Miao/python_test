@@ -19,3 +19,8 @@ def plural(noun):
 
 
 print plural('cheetah')
+
+
+print re.sub('([^aeiou])y$', r'\1ies', 'vacancy')
+
+print re.sub('$', r'ies', 'vacancy')
