@@ -34,5 +34,64 @@ def fib(max):
         print a
         a, b = b, a + b
 
-for n in fib(1000):
-    print n,
+
+li = ['my', 'name', 'is', 'bob']
+print '='.join(li)
+
+print 'sss'.replace('s', 'a')
+
+
+class Student(object):
+    def __init__(self):
+        self._score = 0
+        self._birth = 1900
+
+    @property
+    def score(self):  # 只读属性
+        return self._score
+
+    @score.setter
+    def score(self, value):  # 把方法变成属性赋值
+        if not isinstance(value, int):
+            raise ValueError('score must be an integer!')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0 ~ 100!')
+        self._score = value
+
+    @property
+    def birth(self):
+        return self._birth
+
+    @birth.setter
+    def birth(self, value):
+        self._birth = value
+
+    @property
+    def sub_score(self):
+        return 100 - self._score
+
+
+s = Student()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
