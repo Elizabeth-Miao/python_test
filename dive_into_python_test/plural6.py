@@ -74,7 +74,12 @@ class Student(object):
 s = Student()
 
 
+print 5 >= 6 - 0
 
+import datetime
+
+
+print datetime.datetime.now() >= datetime.datetime.now() - datetime.timedelta(days=1)
 
 
 
