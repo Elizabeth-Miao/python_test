@@ -72,5 +72,6 @@ if __name__ == '__main__':
     p2.start()
     c1 = Consumer(q, con, 'C1')
     c1.start()
+    q.join()
 
 
